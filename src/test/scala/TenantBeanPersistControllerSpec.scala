@@ -5,14 +5,12 @@ import com.xuaps.eTenancy.TenantBeanPersistController;
 import com.xuaps.eTenancy.TenantManager;
 import java.util.UUID;
 
-import com.avaje.ebean.event.BeanQueryRequest;
-import com.avaje.ebean.Query;
-import com.avaje.ebean.ExpressionList;
+import com.avaje.ebean.event.BeanPersistRequest;
 
 class TenantBeanPersistControllerSpec extends FunSpec{
   val tenantManager = new TenantManagerImpl
 
-  describe("TenantBeanQueryAdapter") {
+  describe("TenantBeanPersistController") {
     describe("isRegisterFor") {
       it("should return if Class implements tenant property or not") {
        	val persistController = new TenantBeanPersistController(tenantManager);
@@ -24,21 +22,17 @@ class TenantBeanPersistControllerSpec extends FunSpec{
       }
     }
 
-	describe("preQuery"){
-		it("should add tenant id filter to query"){
-			//val queryAdapter = new TenantBeanQueryAdapter(fixture.tenantManager)
-      	//val beanQueryRequestMock = mock(classOf[BeanQueryRequest[WithTenant]])
-			//val queryMock = mock(classOf[Query[WithTenant]])
-			//val expressionMock = mock(classOf[ExpressionList[WithTenant]])
-			//val tenantId = fixture.tenantManager.getFieldName();
- 			//val value = fixture.tenantManager.getValue.toString();
+	describe("preInsert"){
+		it("should set tenant id value"){
+			val persistController = new TenantBeanPersistController(tenantManager)
+      	val beanPersistRequestMock = mock(classOf[BeanPersistRequest[WithTenant]])
+			val bean = new WithTenant
 
-			//when(queryMock.where()).thenReturn(expressionMock);
-			//when(beanQueryRequestMock.getQuery()).thenReturn(queryMock);
+ 			when(beanPersistRequestMock.getBean()).thenReturn(bean);
 			
-			//queryAdapter.preQuery(beanQueryRequestMock);
+			persistController.preInsert(beanPersistRequestMock);
 
-			//verify(expressionMock).eq(tenantId, value);
+			assert(tenantManager.getValue() == bean.tenantId);
 		}
 	}
   }

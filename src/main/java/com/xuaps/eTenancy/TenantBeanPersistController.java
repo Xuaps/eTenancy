@@ -47,7 +47,15 @@ public class TenantBeanPersistController implements BeanPersistController{
 
 	@Override
 	public boolean preInsert(BeanPersistRequest<?> request){
-		 return false;
+		 try{
+			Field field = request.getBean().getClass().getDeclaredField(tenantManager.getFieldName());
+			field.setAccessible(true);  
+			field.set(request.getBean(),tenantManager.getValue());
+	  
+		 	return true;
+		 }catch(Exception e){		  
+			  return false;
+		 }
   	}
 
 	@Override

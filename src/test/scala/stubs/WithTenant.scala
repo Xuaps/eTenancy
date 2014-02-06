@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 class WithTenant {
-		val tenantId = null;
+		var tenantId : UUID = null;
   }
