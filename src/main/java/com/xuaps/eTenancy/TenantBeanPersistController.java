@@ -8,7 +8,13 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 
 public class TenantBeanPersistController implements BeanPersistController{
-	
+
+   TenantManager tenantManager;
+
+	public TenantBeanPersistController (TenantManager tenantManager){
+		 this.tenantManager = tenantManager;		 
+	}	
+
 	@Override	 
 	public void postLoad(Object bean, Set<String> includedProperties){
 	 	
@@ -41,21 +47,14 @@ public class TenantBeanPersistController implements BeanPersistController{
 
 	@Override
 	public boolean preInsert(BeanPersistRequest<?> request){
-		 try{
-			Field field = request.getBean().getClass().getDeclaredField("tenant_id");
-		 	field.set(request.getBean(),UUID.fromString("a8e9d420-8829-11e3-baa7-0800200c9a66"));
-	  
-		 	return true;
-		 }catch(Exception e){		  
-			  return false;
-		 }
+		 return false;
   	}
 
 	@Override
 	public boolean isRegisterFor(Class<?> cls){
 		 try{
-		 	cls.getDeclaredField("tenant_id");
-			return true;
+			  cls.getDeclaredField(tenantManager.getFieldName());
+  			  return true;
 		 }catch(NoSuchFieldException e){
 			return false;
 		 }
