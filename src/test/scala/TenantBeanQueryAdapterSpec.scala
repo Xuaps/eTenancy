@@ -1,8 +1,8 @@
 import org.scalatest.FunSpec
 import org.mockito.Mockito._;
 
-import ebean.tenancy.TenantBeanQueryAdapter
-import ebean.tenancy.TenantManager;
+import com.xuaps.eTenancy.TenantBeanQueryAdapter
+import com.xuaps.eTenancy.TenantManager;
 import java.util.UUID;
 
 import com.avaje.ebean.event.BeanQueryRequest;

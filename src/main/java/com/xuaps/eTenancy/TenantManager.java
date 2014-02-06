@@ -1,4 +1,4 @@
-package ebean.tenancy;
+package com.xuaps.eTenancy;
 
 import java.util.UUID;
 

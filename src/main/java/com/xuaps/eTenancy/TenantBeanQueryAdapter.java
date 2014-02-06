@@ -1,4 +1,4 @@
-package ebean.tenancy;
+package com.xuaps.eTenancy;
 
 import com.avaje.ebean.Query;
 import com.avaje.ebean.event.BeanQueryAdapter;
