@@ -19,7 +19,7 @@ class TenantBeanQueryAdapterSpec extends FunSpec{
   }
 
 	def fixture = new {
-	  	val tenantManager = mock(classOf[TenantManager]);
+	  	val tenantManager = mock(classOf[TenantManager[UUID]]);
 		when(tenantManager.getFieldName()).thenReturn("tenantId");
 		when(tenantManager.getValue()).thenReturn(UUID.fromString("550e8400-e29b-41d4-a716-446655440000"));
    }

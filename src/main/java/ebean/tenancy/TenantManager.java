@@ -2,7 +2,7 @@ package ebean.tenancy;
 
 import java.util.UUID;
 
-public interface TenantManager{
+public interface TenantManager<T>{
 	 String getFieldName();
-	 UUID getValue();
+	 T getValue();
 }
