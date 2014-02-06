@@ -29,6 +29,8 @@ public class TenantBeanQueryAdapter implements BeanQueryAdapter {
 
     @Override
     public void preQuery(BeanQueryRequest<?> beanQueryRequest) {
-        
+        Query query=beanQueryRequest.getQuery();
+
+        query.where().eq(this.tenantManager.getFieldName(),this.tenantManager.getValue().toString());
     }
 }
